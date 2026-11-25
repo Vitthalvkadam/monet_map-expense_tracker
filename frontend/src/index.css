@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --desk: #ffe3c4;
+  --paper: #fff8ec;
+  --soft: #ffeed6;
+  --line: #1b1b1b;
+  --fg: #1b1b1b;
+  --muted: #7a6450;
+  --shadow: #1b1b1b;
+  --danger: #c2301f;
+  --paper-rgb: 255 248 236;
+  --line-rgb: 27 27 27;
+  --muted-rgb: 122 100 80;
+}
+
+[data-theme='dark'] {
+  --desk: #241b30;
+  --paper: #352a44;
+  --soft: #2d2339;
+  --line: #ffe9cc;
+  --fg: #fff1de;
+  --muted: #c9b7a3;
+  --shadow: #0d0914;
+  --danger: #ff9486;
+  --paper-rgb: 53 42 68;
+  --line-rgb: 255 233 204;
+  --muted-rgb: 201 183 163;
+}
+
+@layer base {
+  html, body, #root { min-height: 100%; }
+  body {
+    @apply font-body text-fg bg-desk;
+    background-image: radial-gradient(var(--line) 1px, transparent 1.2px);
+    background-size: 22px 22px;
+    background-attachment: fixed;
+  }
+  [data-theme='light'] body { background-image: radial-gradient(rgba(27,27,27,.13) 1.2px, transparent 1.4px); }
+  [data-theme='dark'] body { background-image: radial-gradient(rgba(255,233,204,.10) 1.2px, transparent 1.4px); }
+  h1, h2, h3, h4 { @apply font-display; }
+  input, select, textarea { @apply text-fg; }
+  :focus-visible { outline: 3px solid #7c5cff; outline-offset: 2px; }
+}
+
+@layer components {
+  .field {
+    @apply w-full rounded-xl border-[3px] border-line bg-paper px-3 py-2 font-semibold text-fg placeholder:text-muted/70 focus:bg-butter/40;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border-[3px] border-line px-4 py-2 font-display text-[15px] font-semibold text-ink shadow-hard-sm transition-all;
+    @apply hover:-translate-y-0.5 hover:shadow-hard active:translate-x-0.5 active:translate-y-0.5 active:shadow-none disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .scroll-x { overflow-x: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+@keyframes pop { from { transform: scale(.94); opacity: 0 } to { transform: scale(1); opacity: 1 } }
+.pop-in { animation: pop .18s ease-out; }

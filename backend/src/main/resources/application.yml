@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/moneymap}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:root}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update   # creates/updates tables automatically (fine for this project)
+
+app:
+  jwt:
+    # Change this in production: set the JWT_SECRET environment variable (32+ characters)
+    secret: ${JWT_SECRET:dev-only-secret-change-me-please-32-bytes-min!!}
+    expiry-hours: 72
+  cors-origins: ${CORS_ORIGINS:http://localhost:5173}
